@@ -1,4 +1,4 @@
-#Connect to wifi
+\#Connect to wifi
 wifi-menu
 
 # list current partitions

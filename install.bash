@@ -1,13 +1,10 @@
-\#Connect to wifi
-
+#Connect to wifi
 wifi-menu
 
-\# list current partitions
-
+# list current partitions
 lsblk
 
-\# Create drive partitions
-
+# Create drive partitions
 cgdisk /dev/sda 
 
 # format hard drive

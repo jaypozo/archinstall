@@ -81,3 +81,21 @@ pacman -S dialog wpa_actiond
 # first, check interface_name with ip link
 ip link 
 systemctl enable netctl-auto@<interface_name>.service 
+
+# install lightdm and greeter
+pacman -S lightdm lightdm-gtk-greeter
+
+# install openbox 
+pacman -S openbox obconf obmenu
+
+# install menumaker
+pacman -S menumaker
+
+# generate menu
+pacman -S mmaker -v OpenBox3
+
+# install screenfetch
+pacman -S screenfetch
+
+# add screenfetch to end of .bashrc
+vim ~/.bashrc

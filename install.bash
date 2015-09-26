@@ -15,7 +15,7 @@ mkswap /dev/sda3
 swapon /dev/sda3
 
 # Mount partition, ie. sda1
-mount /dev/sda1
+mount /dev/sda1 /mnt
 
 # choose mirror
 nano /etc/pacman.d/mirrorlist

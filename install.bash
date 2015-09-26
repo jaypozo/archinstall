@@ -82,6 +82,9 @@ pacman -S dialog wpa_actiond
 ip link 
 systemctl enable netctl-auto@<interface_name>.service 
 
+#install xorg and xterm
+pacman -S xorg-server xorg-server-utils xorg-xinit xorg-twm xorg-xclock xterm
+
 # install lightdm and greeter
 pacman -S lightdm lightdm-gtk-greeter
 
@@ -92,10 +95,13 @@ pacman -S openbox obconf obmenu
 pacman -S menumaker
 
 # generate menu
-pacman -S mmaker -v OpenBox3
+mmaker -v OpenBox3
 
 # install screenfetch
 pacman -S screenfetch
+
+# enable lightdm
+systemctl enable lightdm.service
 
 # add screenfetch to end of .bashrc
 vim ~/.bashrc

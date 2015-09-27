@@ -21,7 +21,7 @@ mount /dev/sda1 /mnt
 nano /etc/pacman.d/mirrorlist
 
 # install base packages
-pacstrap /mnt base base-devl
+pacstrap /mnt base base-devel
 
 # configure filesystem with fstab
 genfstab -U -p /mnt >> /mnt/etc/fstab
@@ -46,7 +46,7 @@ echo LANG=en_US.UTF-8 > /etc/locale.conf
 export LANG=en_US.UTF-8
 
 # set the time zone
-ln -sf /usr/share/zoneinfo/Canada/Pacific /etc/localtime
+ln -sf /usr/share/zoneinfo/Canada/Pacific > /etc/localtime
 
 # configure hardware clock
 hwclock --systohc --utc
@@ -60,6 +60,9 @@ passwd jay
 
 # visudo new user
 EDITOR=nano visudo
+
+#update pacman
+pacman -Syu
 
 # install bash-completion
 pacman -S bash-completion
@@ -81,6 +84,12 @@ pacman -S dialog wpa_actiond
 # first, check interface_name with ip link
 ip link 
 systemctl enable netctl-auto@<interface_name>.service 
+systemctl enable dhcpcd@<interface_name>.service
+
+#mv netctl 
+cp /etc/netctl/examples/ethernet-dhcp /etc/netctl/ethernet-dhcp
+
+#update /etc/netctl/ethernet-dhcp to use interface from ip link
 
 #install xorg and xterm
 pacman -S xorg-server xorg-server-utils xorg-xinit xorg-twm xorg-xclock xterm
@@ -88,11 +97,16 @@ pacman -S xorg-server xorg-server-utils xorg-xinit xorg-twm xorg-xclock xterm
 # install lightdm and greeter
 pacman -S lightdm lightdm-gtk-greeter
 
+# enable lightdm
+systemctl enable lightdm.service
+
 # install openbox 
 pacman -S openbox obconf obmenu
 
 # install menumaker
 pacman -S menumaker
+
+### logout then log into openbox
 
 # generate menu
 mmaker -v OpenBox3
@@ -100,8 +114,6 @@ mmaker -v OpenBox3
 # install screenfetch
 pacman -S screenfetch
 
-# enable lightdm
-systemctl enable lightdm.service
 
 # add screenfetch to end of .bashrc
 vim ~/.bashrc
